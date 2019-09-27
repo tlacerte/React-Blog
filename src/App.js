@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Nav from './Nav'
 import Footer from './Footer'
+import BlogForm from './BlogForm'
 
 class App extends Component {
   state = {
@@ -34,7 +35,7 @@ class App extends Component {
     const composedPosts = this.state.posts.map((item, index) => {
       return (
         <li key={index} className="post">
-          <h3 clasName="postTitle">{item.title}</h3>
+          <h3 className="postTitle">{item.title}</h3>
           <p>{item.content}</p>
           <h6>{item.user}</h6>
         </li>
@@ -44,6 +45,7 @@ class App extends Component {
       <div className="App container">
           <Nav />
           {this.state.isShowing ? title : null}
+          <BlogForm />
           <ul>{composedPosts}</ul>
           <button onClick={this.handleClick}>click me</button>
           <Footer />

@@ -6,7 +6,7 @@ import BlogForm from './BlogForm'
 
 class App extends Component {
   state = {
-    isShowing : true,
+    isShowing : false,
     posts : [
       {
         title : "My first confetti blog",
@@ -21,7 +21,7 @@ class App extends Component {
     ]
   }
   //define all event logic hear
-  handleClick = (event) => {
+  handleShowForm = (event) => {
     this.setState({
       isShowing: !this.state.isShowing
     })
@@ -43,11 +43,9 @@ class App extends Component {
     })
     return (
       <div className="App container">
-          <Nav />
-          {this.state.isShowing ? title : null}
-          <BlogForm />
+          <Nav content="NAV"/>
+          {this.state.isShowing ? <BlogForm /> : <button onClick={this.handleShowForm}>Add Post</button>}
           <ul>{composedPosts}</ul>
-          <button onClick={this.handleClick}>click me</button>
           <Footer />
       </div>
     );

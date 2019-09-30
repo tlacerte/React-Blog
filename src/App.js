@@ -27,6 +27,12 @@ class App extends Component {
     })
   }
 
+  handleAddPost = (post) =>{
+    this.setState({
+        posts: [{...post}, ...this.state.posts]
+    })
+  }
+  
   // render will handle the view
   render (){
     //compose components down here and later we will pull these out
@@ -43,8 +49,14 @@ class App extends Component {
     })
     return (
       <div className="App container">
+          <div>{title}</div>
           <Nav content="NAV"/>
-          {this.state.isShowing ? <BlogForm /> : <button onClick={this.handleShowForm}>Add Post</button>}
+          {this.state.isShowing ? 
+            <BlogForm 
+              handleAddPost={this.handleAddPost}
+              handleToggle={this.handleShowForm}
+              /> : 
+              <button onClick={this.handleShowForm}>Add Post</button>}
           <ul>{composedPosts}</ul>
           <Footer />
       </div>

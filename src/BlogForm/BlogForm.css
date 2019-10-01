@@ -1,4 +1,4 @@
-.blog-from {
+.blog-form {
     display: flex;
     flex-direction: column;
 }
@@ -6,5 +6,5 @@
 .post-title-author {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
 }

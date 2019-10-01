@@ -1,9 +1,14 @@
 import React from 'react'
-
+import './Nav.css'
 
 const Nav = () => {
     return (
-        <h3>I am a nav bar!</h3>
+        <nav>
+            <ul className="nav-bar">
+                <li>Home</li>
+                <li>About</li>
+            </ul>
+        </nav>
     )
 }
 

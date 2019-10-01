@@ -33,6 +33,15 @@ class App extends Component {
     })
   }
   
+  handleDelete = id => {
+    //first copy state and modify it
+    let newState = this.state.posts.filter(item => this.state.posts[id] !== item)
+    //set state
+    this.setState({
+      posts : newState
+    })
+  }
+
   // render will handle the view
   render (){
     //compose components down here and later we will pull these out
@@ -44,13 +53,14 @@ class App extends Component {
           <h3 className="postTitle">{item.title}</h3>
           <p>{item.content}</p>
           <h6>{item.user}</h6>
+          <button onClick={() => this.handleDelete(index)}>Delete</button>
         </li>
       )
     })
     return (
       <div className="App container">
-          <div>{title}</div>
           <Nav content="NAV"/>
+          <div>{title}</div>
           {this.state.isShowing ? 
             <BlogForm 
               handleAddPost={this.handleAddPost}

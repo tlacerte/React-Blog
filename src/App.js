@@ -3,6 +3,7 @@ import './App.css';
 import Nav from './Nav'
 import Footer from './Footer'
 import BlogForm from './BlogForm'
+import Post from './Post/Post'
 
 class App extends Component {
   state = {
@@ -49,12 +50,14 @@ class App extends Component {
     const title = <h1>Confetti Blog</h1>
     const composedPosts = this.state.posts.map((item, index) => {
       return (
-        <li key={index} className="post">
-          <h3 className="postTitle">{item.title}</h3>
-          <p>{item.content}</p>
-          <h6>{item.user}</h6>
-          <button onClick={() => this.handleDelete(index)}>Delete</button>
-        </li>
+        <Post 
+          key={index} 
+          title={item.title}
+          user={item.user}
+          content={item.content} 
+          handleDelete={this.handleDelete}
+          id={index}
+        />
       )
     })
     return (

@@ -8,19 +8,18 @@ import Post from './Post/Post'
 class App extends Component {
   state = {
     isShowing : false,
-    posts : [
-      {
-        title : "My first confetti blog",
-        content : "i love confetti! it should be everywhere!!!!",
-        user : "tlacerte"
-      },
-      {
-        title : "blogs are fun",
-        content : "i've learned so much about blogs",
-        user : "sarahl"
-      }
-    ]
+    posts : []
   }
+
+  componentDidMount = () => {
+    getAll().then(results =>{
+      this.setState({
+        posts: [...results]
+      })
+    })
+  }
+  
+
   //define all event logic hear
   handleShowForm = (event) => {
     this.setState({
@@ -28,9 +27,18 @@ class App extends Component {
     })
   }
 
-  handleAddPost = (post) =>{
-    this.setState({
-        posts: [{...post}, ...this.state.posts]
+  handleAddPost = ({ title, author, post }) =>{
+    const url = "http://localhost:8000/api/posts"
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify({title, author, post})
+    }
+
+    handleVerbs(url, options).then(results =>{
+      
     })
   }
   
@@ -53,8 +61,8 @@ class App extends Component {
         <Post 
           key={index} 
           title={item.title}
-          user={item.user}
-          content={item.content} 
+          user={item.author}
+          content={item.post} 
           handleDelete={this.handleDelete}
           id={index}
         />
@@ -78,3 +86,16 @@ class App extends Component {
 }
 
 export default App;
+
+async function getAll(){
+  const url = "http://localhost:8000/api/posts"
+  const initialFetch = await fetch(url)
+  const fetchJSON = await initialFetch.json()
+  return await fetchJSON
+}
+
+async function handleVerbs(url, options){
+  const initialFetch = await fetch(url, options)
+  const fetchJSON = await initialFetch.json()
+  return await fetchJSON
+}

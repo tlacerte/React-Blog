@@ -5,8 +5,8 @@ import './BlogForm.css'
 class BlogForm extends Component{
     state = {
         title : "",
-        content : "",
-        user : "",
+        post : "",
+        author : "",
     }
     handleOnChange = event =>{
         this.setState({
@@ -21,6 +21,7 @@ class BlogForm extends Component{
         event.preventDefault()
         this.props.handleAddPost({...this.state})
     }
+    
     render(){
         return (
             <form action="blogform" className="blog-form" onSubmit={this.handleSubmit}>
@@ -39,18 +40,18 @@ class BlogForm extends Component{
                         <label>Author</label>
                         <input 
                             type="text" 
-                            name="user" 
+                            name="author" 
                             onChange={this.handleOnChange} 
-                            value={this.state.user} 
+                            value={this.state.author} 
                         />
                     </div>
                 </div>
                 <label>Content</label>
                 <textarea 
                     type="text" 
-                    name="content" 
+                    name="post" 
                     onChange={this.handleOnChange} 
-                    value={this.state.content} 
+                    value={this.state.post} 
                 />
                 <button className="button-primary" onClick={this.props.handleToggle}>close</button>
                 <input type="submit" />
